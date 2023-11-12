@@ -1,0 +1,23 @@
+
+
+.App {
+    text-align: center;
+    display: flex;
+    height: 100%;
+}
+
+
+.Leaders-table-container {
+    flex: 1;
+    align-self: end;
+    height: 500px;
+    max-width: 402px;
+}
+
+.App .Map-container {
+    flex: 1;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+}
