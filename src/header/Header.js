@@ -13,6 +13,11 @@ function Header() {
                     <div className="logo-title">МГТУ имени Н.Э. Баумана</div>
                 </span>
             </div>
+
+            <div className="faculty">
+                <div className="faculty-name">Информатика и управление</div>
+                <div className="department-name">Программное обеспечение ЭВМ, информационные технологии</div>
+            </div>
         </header>
     )
 }

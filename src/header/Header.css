@@ -1,5 +1,6 @@
 
 header {
+    display: flex;
     height: fit-content;
     width: 100%;
 }
@@ -37,3 +38,27 @@ header {
     line-height: 1.1875;
     color: var(--black-color);
 }
+
+.faculty {
+    padding: 10px 20px;
+    margin: 10px 0px;
+    text-align: left;
+    border-left: 1px solid var(--gray-color) ;
+}
+
+.faculty-name {
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    margin-top: 2px;
+    margin-bottom: 1px;
+    color: var(--black-color);
+}
+
+.department-name {
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    color: var(--black-color);
+}
+
