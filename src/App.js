@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, {useEffect} from "react";
 import {useState} from 'react';
 import PrettyMap from "./map/PrettyMap";
 
@@ -9,33 +9,47 @@ import KalugaOblastSVG from "./map/KlgMap";
 import LeadersTable from "./table/LeadersTable"; // Optional theme CSS
 
 
-const rowDataA = [
-    {id: 'kl_26', region: 'Обнинск', count: 1},
-    {id: 'kl_25', region: 'Калуга', count: 2},
-    {id: 'kl_4', region: 'Киров', count: 0},
-];
-
-const rowDataB = [
-    {id: 'kl_26', region: 'Обнинск', count: 1},
-    {id: 'kl_25', region: 'Калуга', count: 5},
-    {id: 'kl_4', region: 'Киров', count: 3},
-];
-
-
 function App() {
-    const [crowData, setCrowData] = useState(rowDataA);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        // fetch('/api/data/').then(resp => resp.json()).then(data1 => {
+        //     setData(data1)
+        // });
+
+        function update() {
+            fetch("/api/data/")
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        console.log("Looks like there was a problem. Status Code: " + response.status);
+                        return;
+                    }
+                    response.json().then(data1 => {
+                        setData(data1)
+                    });
+                })
+                .catch(function (err) {
+                    console.log("Fetch Error :-S", err);
+                })
+        }
+        update()
+
+        const id = setInterval(() => update()
+            , 5000)
+    }, [])
+
 
     const map_id = 'kal_map'
     return (
         <div className="App">
             <div className="Map-container">
-                <PrettyMap data={crowData} childId={map_id} key={crowData}>
+                <PrettyMap data={data} childId={map_id} key={data}>
                     <KalugaOblastSVG id={map_id}/>
                 </PrettyMap>
             </div>
 
             <div className="Leaders-table-container">
-                <LeadersTable rowData={crowData}/>
+                <LeadersTable rowData={data}/>
             </div>
         </div>
     );
