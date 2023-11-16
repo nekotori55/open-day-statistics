@@ -1,9 +1,40 @@
 
+:root {
+    --blue-color: #176DEA;
+    --blue-color-hover: #1562D3;
+    --black-color: #292C33;
+    --gray-color: #A2A3A3;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: local('Gilroy Regular'), local('Gilroy-Regular'),
+        url('./fonts/Gilroy-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: local('Gilroy Bold'), local('Gilroy-Bold'),
+        url('./fonts/Gilroy-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: local('Gilroy SemiBold'), local('Gilroy-SemiBold'),
+        url('./fonts/Gilroy-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
 
 .App {
     text-align: center;
     display: flex;
-    height: 100%;
+    height: 100vh;
+    font-family: Gilroy;
 }
 
 
