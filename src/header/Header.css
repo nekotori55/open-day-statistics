@@ -1,0 +1,39 @@
+
+header {
+    height: fit-content;
+    width: 100%;
+}
+
+.logo {
+    width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo-image img {
+    display: block;
+    width: 40px;
+}
+
+.logo-text {
+    padding-left: 14px;
+}
+
+.logo-suptitle {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.38em;
+    line-height: 1.25;
+    font-weight: bold;
+    padding-bottom: 1px;
+    color: var(--blue-color);
+}
+
+.logo-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.1875;
+    color: var(--black-color);
+}
