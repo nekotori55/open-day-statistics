@@ -12,7 +12,6 @@ function PrettyMap({data, childId, children}) {
 
         let all = []
         for (const [row_id, row_data] of Object.entries(data)) {
-            console.log(row_data['count'])
             if (row_data['count'] !== 0) {
                 all.push({id: row_data['id'], count: row_data['count']})
             }
@@ -57,7 +56,6 @@ function PrettyMap({data, childId, children}) {
                 let lineElement = document.createElementNS("http://www.w3.org/2000/svg", "line")
                 // s.setAttribute('dominant-baseline', 'middle')
                 lineElement.setAttribute('id', district_id + '_line')
-                console.log(district_id + '_line')
                 lineElement.setAttribute('stroke', '#176dea')
                 lineElement.setAttribute('x1', district_rect.x + district_rect.width / 2)
                 lineElement.setAttribute('y1', district_rect.y + district_rect.height / 2)
