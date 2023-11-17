@@ -35,20 +35,37 @@
     display: flex;
     height: 100vh;
     font-family: Gilroy;
+    flex-direction: column;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
 }
 
 
 .Leaders-table-container {
     flex: 1;
     align-self: end;
-    height: 500px;
-    max-width: 402px;
+    height: 30%;
+    max-width: 500px;
 }
 
 .App .Map-container {
     flex: 1;
-    height: 100vh;
+    max-width: 60%;
 
     display: flex;
     justify-content: center;
 }
+
+.Filler {
+    flex: auto;
+}
+
+.App .Map-container svg {
+    height: 100%;
+}
+
+
