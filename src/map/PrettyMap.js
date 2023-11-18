@@ -1,105 +1,104 @@
 import React, {useEffect, useState} from "react";
 
 function PrettyMap({data, childId, children}) {
-    const [currentLines, setCurrentLines] = useState([]);
+    const [currentData, setCurrentData] = useState([]);
 
-    let animation = true
+    let doDrawLines = true;
+    let doDrawNumbers = true;
+    let doDrawCircles = true;
+    let isLineAnimated = true;
 
     useEffect(() => {
-        const svg_root = document.getElementById(childId)
-        let kaluga = document.getElementById("kl_25")
-        let kaluga_rect = kaluga.getBBox()
+            const svgRoot = document.getElementById(childId)
 
-        let all = []
-        for (const [row_id, row_data] of Object.entries(data)) {
-            if (row_data['count'] !== 0) {
-                all.push({id: row_data['id'], count: row_data['count']})
+            let drawData = convertRawDataToDrawData(data);
+
+            removePreviouslyRenderedElements(svgRoot);
+
+            if (doDrawLines) {
+                let lineTargetId = "kl_25"
+                let lineTargetElement = svgRoot.getElementById(lineTargetId)
+
+                drawLines(drawData, lineTargetElement, isLineAnimated, svgRoot);
             }
+
+            if (doDrawCircles) {
+            }
+
+            if (doDrawNumbers) {
+            }
+
+            setCurrentData(drawData)
         }
+        ,
+        [data]
+    )
 
-        let to_add = []
-        for (const elem of all) {
-            let flag = false
-            for (const old_elem of currentLines) {
-                if (elem.id === old_elem.id) {
-                    flag = true
-                    break
-                }
-            }
-            if (!flag)
-                to_add.push(elem)
-        }
+    return (children);
+}
 
-        let to_remove = []
-        for (const old_elem of currentLines) {
-            let flag = false
-            for (const elem of all) {
-                if (old_elem.id === elem.id) {
-                    flag = true
-                    break
-                }
-            }
-            if (!flag) {
-                to_remove.push(old_elem)
-            }
-        }
+function drawLines(newDrawData, targetElement, isLineAnimated, svgRoot) {
+    let lineTargetRect = targetElement.getBBox()
 
+    for (const obj of newDrawData) {
+        let regionId = obj.id
+        let count = obj.count
 
-        for (const obj of to_add) {
-            let district_id = obj.id
-            let count = obj.count
-
-            let district_object = document.getElementById(district_id);
-            if (district_object != null && district_id !== "kl_25" && count !== 0) {
-                let district_rect = district_object.getBBox()
+        let regionElement = document.getElementById(regionId);
+        if (regionElement != null) {
+            if (regionElement !== targetElement && count !== 0) {
+                let regionRect = regionElement.getBBox()
 
                 let lineElement = document.createElementNS("http://www.w3.org/2000/svg", "line")
                 // s.setAttribute('dominant-baseline', 'middle')
-                lineElement.setAttribute('id', district_id + '_line')
+                lineElement.setAttribute('id', regionId + '_line')
                 lineElement.setAttribute('stroke', '#176dea')
-                lineElement.setAttribute('x1', district_rect.x + district_rect.width / 2)
-                lineElement.setAttribute('y1', district_rect.y + district_rect.height / 2)
-                lineElement.setAttribute('x2', kaluga_rect.x + kaluga_rect.width / 2)
-                lineElement.setAttribute('y2', kaluga_rect.y + kaluga_rect.height / 2)
+                lineElement.setAttribute('x1', regionRect.x + regionRect.width / 2)
+                lineElement.setAttribute('y1', regionRect.y + regionRect.height / 2)
+                lineElement.setAttribute('x2', lineTargetRect.x + lineTargetRect.width / 2)
+                lineElement.setAttribute('y2', lineTargetRect.y + lineTargetRect.height / 2)
+                // lineElement.setAttribute('class', 'rendered')
+                lineElement.classList.add("rendered")
 
-                // let animation = false
 
-
-                if (animation) {
+                if (isLineAnimated) {
                     lineElement.setAttribute('stroke-dasharray', '40 10')
                     // lineElement.setAttribute('stroke-dasharray', '300 600')
 
                     let anim = document.createElementNS("http://www.w3.org/2000/svg", "animate")
-                    anim.setAttribute('id', district_id + '_anim')
 
                     anim.setAttribute('attributeName', 'stroke-dashoffset')
                     anim.setAttribute('values', '100%; 0%')
-                    anim.setAttribute('dur', '100s')
+                    anim.setAttribute('dur', Math.floor(100 / count) + 's')
                     // anim.setAttribute('dur', '10s')
                     anim.setAttribute('repeatCount', 'indefinite')
                     anim.setAttribute('fill', 'freeze')
+                    anim.classList.add("rendered")
                     lineElement.append(anim)
 
                 }
-                svg_root.append(lineElement)
-            } else {
-                // let district_rect = district_object.getBBox()
+                svgRoot.append(lineElement)
             }
         }
-
-        for (const obj of to_remove) {
-            let line = document.getElementById(obj.id + '_line')
-            line.remove()
-        }
-
-        setCurrentLines(all)
-    }, [data])
-
-    return (
-        <>
-            {children}
-        </>
-    );
+    }
 }
+
+function convertRawDataToDrawData(data) {
+    let drawData = []
+    for (const [id, rawData] of Object.entries(data)) {
+        if (rawData['count'] !== 0) {
+            drawData.push({id: rawData['id'], count: rawData['count']})
+        }
+    }
+    return drawData;
+}
+
+function removePreviouslyRenderedElements(svgRoot) {
+    let renderedElements = svgRoot.getElementsByClassName('rendered')
+    while (renderedElements[0]) {
+        renderedElements[0].parentNode.removeChild(renderedElements[0])
+    }
+}
+
 
 export default PrettyMap;
