@@ -5,9 +5,21 @@ import {AgGridReact} from "ag-grid-react";
 const LeadersTable = ({rowData}) => {
     const gridStyle = useMemo(() => ({height: '100%', width: '100%'}), []);
     const [columnDefs, setColumnDefs] = useState([
-        {field: 'region', headerName: 'Регион'},
-        {field: 'count', headerName: 'Количество', sortable: true, sort: 'desc'},
+        {
+            headerName: 'Регион',
+            field: 'region',
+            flex: 1,
+            cellStyle: {textAlign: 'left'},
+        },
+        {
+            headerName: 'Количество',
+            field: 'count',
+            flex: 1,
+            sort: 'desc',
+            cellStyle: {textAlign: 'left'},
+        },
     ]);
+
     const getRowId = useMemo(() => {
         return (params) => params.data.id;
     }, []);
@@ -23,8 +35,7 @@ const LeadersTable = ({rowData}) => {
                 enableCellChangeFlash={true}
                 pagination={true}
                 suppressPaginationPanel={true}
-                // paginationPageSize={2}
-                paginationAutoPageSize={true}
+                paginationPageSize={5}
             />
         </div>
     );
