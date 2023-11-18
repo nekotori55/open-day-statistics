@@ -15,8 +15,8 @@ function Header() {
             </div>
 
             <div className="faculty">
-                <div className="faculty-name">Информатика и управление</div>
-                <div className="department-name">Программное обеспечение ЭВМ, информационные технологии</div>
+                <div className="faculty-name">09.03.04 Программная инженерия</div>
+                <div className="department-name">Кафедра ИУК4 «Программное обеспечение ЭВМ, информационные технологии»</div>
             </div>
         </header>
     )
