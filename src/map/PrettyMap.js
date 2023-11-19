@@ -30,6 +30,7 @@ function PrettyMap({data, childId, children}) {
             }
 
             if (doDrawNumbers) {
+                drawNumbers(drawData, svgElement);
             }
 
             setCurrentData(drawData);
@@ -39,6 +40,41 @@ function PrettyMap({data, childId, children}) {
     );
 
     return (children);
+}
+
+function createTextElement(regionId, regionRectCenter, count) {
+    let textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    textElement.setAttribute("id", regionId + "_circle");
+    textElement.setAttribute("x", regionRectCenter.x);
+    textElement.setAttribute("y", regionRectCenter.y);
+    textElement.setAttribute("text-anchor", "middle");
+    textElement.setAttribute("alignment-baseline", "central");
+    textElement.setAttribute("font-size", count + 10);
+    textElement.setAttribute("fill", "#ffffff");
+    // textElement.setAttribute("r", 5 + count);
+    textElement.classList.add("rendered");
+
+    let theText = document.createTextNode(count);
+    textElement.appendChild(theText);
+    return textElement;
+}
+
+function drawNumbers(drawData, root) {
+    for (const obj of drawData) {
+        let regionId = obj.id;
+        let count = obj.count;
+
+        let regionElement = root.getElementById(regionId);
+        if (regionElement != null) {
+            let regionRect = regionElement.getBBox();
+
+            let regionRectCenter = calcElementPosition(regionRect, regionId);
+
+            let textElement = createTextElement(regionId, regionRectCenter, count);
+
+            root.append(textElement);
+        }
+    }
 }
 
 function createCircleElement(regionId, regionRectCenter, count) {
