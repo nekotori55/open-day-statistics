@@ -26,6 +26,7 @@ function PrettyMap({data, childId, children}) {
             }
 
             if (doDrawCircles) {
+                drawCircles(drawData, svgElement);
             }
 
             if (doDrawNumbers) {
@@ -38,6 +39,17 @@ function PrettyMap({data, childId, children}) {
     );
 
     return (children);
+}
+
+function createCircleElement(regionId, regionRectCenter, count) {
+    let circleElement = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circleElement.setAttribute("id", regionId + "_circle");
+    circleElement.setAttribute("cx", regionRectCenter.x);
+    circleElement.setAttribute("cy", regionRectCenter.y);
+    circleElement.setAttribute("r", 5 + count);
+    circleElement.setAttribute("fill", "#3892f6");
+    circleElement.classList.add("rendered");
+    return circleElement;
 }
 
 function calcElementPosition(regionRect, regionId = "") {
@@ -56,6 +68,24 @@ function calcElementPosition(regionRect, regionId = "") {
     }
 
     return regionRectCenter;
+}
+
+function drawCircles(drawData, root) {
+    for (const obj of drawData) {
+        let regionId = obj.id;
+        let count = obj.count;
+
+        let regionElement = root.getElementById(regionId);
+        if (regionElement != null) {
+            let regionRect = regionElement.getBBox();
+
+            let regionRectCenter = calcElementPosition(regionRect, regionId);
+
+            let circleElement = createCircleElement(regionId, regionRectCenter, count);
+
+            root.append(circleElement);
+        }
+    }
 }
 
 function createLineElement(regionId, regionRectCenter, targetRectCenter, isLineAnimated = false, animationSpeed = 1, lineColor = "#176dea") {
