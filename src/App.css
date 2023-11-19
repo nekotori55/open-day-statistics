@@ -40,34 +40,36 @@
 
 .main-content {
     display: flex;
-    flex-direction: row;
     height: 100%;
+}
+
+.information {
+    flex-grow: 1;
+    display: flex;
+}
+
+.form {
+    width: 25%;
 }
 
 
 .Leaders-table-container {
-    flex: 1;
     align-self: end;
     height: 30%;
-    max-width: 500px;
+    width: 30%;
 }
 
-.App .Map-container {
-    flex: 1;
-    max-width: 60%;
+.Map-container {
+    /*flex-grow: 1;*/
 
     display: flex;
     justify-content: center;
 }
 
-.form-container {
-    flex: 1;
-
-    padding: 0 50px;
-}
-
-.App .Map-container svg {
+.Map-container svg {
     height: 100%;
 }
+
+
 
 

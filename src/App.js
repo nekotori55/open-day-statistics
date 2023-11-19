@@ -9,6 +9,7 @@ import KalugaOblastSVG from "./map/KlgMap";
 import LeadersTable from "./table/LeadersTable";
 import Header from "./header/Header"; // Optional theme CSS
 import Form from "./form/Form";
+
 // import {FilterComponent} from "ag-grid-community/dist/lib/components/framework/componentTypes";
 
 
@@ -48,18 +49,21 @@ function App() {
         <div className="App">
             <Header/>
             <div className="main-content">
-                <div className="Leaders-table-container">
-                    <LeadersTable rowData={data}/>
-                </div>
+                <div className="information">
+                    <div className="Leaders-table-container">
+                        <LeadersTable rowData={data}/>
+                    </div>
 
-                <div className="Map-container">
-                    <PrettyMap data={data} childId={map_id} key={data}>
-                        <KalugaOblastSVG id={map_id}/>
-                    </PrettyMap>
+                    <div className="Map-container">
+                        <PrettyMap data={data} childId={map_id} key={data}>
+                            <KalugaOblastSVG id={map_id}/>
+                        </PrettyMap>
+                    </div>
                 </div>
-
-                <div className="form-container">
-                    <Form/>
+                <div className="form">
+                    <div className="form-container">
+                        <Form/>
+                    </div>
                 </div>
             </div>
         </div>
