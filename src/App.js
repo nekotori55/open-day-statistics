@@ -60,6 +60,13 @@ function App() {
                         </PrettyMap>
                     </div>
                 </div>
+                <input type="checkbox" id="hide-checkbox"/>
+                <div className="hide-button-container">
+                    <label className="hide-button" for="hide-checkbox">
+                        <span className="off">❮</span>
+                        <span className="on">❯</span>
+                    </label>
+                </div>
                 <div className="form">
                     <div className="form-container">
                         <Form/>

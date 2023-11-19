@@ -52,6 +52,11 @@
     width: 25%;
 }
 
+.form-container {
+    padding: 0 10px;
+    border-left: 1px solid var(--gray-color);
+}
+
 
 .Leaders-table-container {
     align-self: end;
@@ -69,6 +74,46 @@
 .Map-container svg {
     height: 100%;
 }
+
+#hide-checkbox {
+    display: none;
+}
+
+.hide-button-container {
+    width: 40px;
+}
+
+.hide-button {
+    display: block;
+    width: 100%;
+    margin-top: 100px;
+
+    padding: 14px 0;
+    border-radius: 21px 0 0 21px;
+    font-size: 24px;
+    background: var(--blue-color);
+    color: #FFFFFF;
+    line-height: 1.5;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.off {
+    display: none;
+}
+
+#hide-checkbox:checked~.hide-button-container .off {
+    display: inline;
+}
+
+#hide-checkbox:checked~.hide-button-container .on {
+    display: none;
+}
+
+#hide-checkbox:checked~.form {
+    display: none;
+}
+
 
 
 
