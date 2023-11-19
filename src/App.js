@@ -8,6 +8,8 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import KalugaOblastSVG from "./map/KlgMap";
 import LeadersTable from "./table/LeadersTable";
 import Header from "./header/Header"; // Optional theme CSS
+import Form from "./form/Form";
+// import {FilterComponent} from "ag-grid-community/dist/lib/components/framework/componentTypes";
 
 
 function App() {
@@ -56,8 +58,8 @@ function App() {
                     </PrettyMap>
                 </div>
 
-                <div className="Filler">
-
+                <div className="form-container">
+                    <Form/>
                 </div>
             </div>
         </div>
