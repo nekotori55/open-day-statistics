@@ -68,5 +68,11 @@ input:checked+.fake-checkbox {
     color: #FFFFFF;
     line-height: 1.5;
     font-weight: 600;
+    cursor: pointer;
 }
+
+.form-button:hover {
+    background: var(--blue-color-hover);
+}
+
 
