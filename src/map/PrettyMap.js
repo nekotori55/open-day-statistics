@@ -15,11 +15,10 @@ function PrettyMap({data, childId, children}) {
 
     useEffect(() => {
             const svgElement = document.getElementById(childId);
-
-            const aboba = document.getElementById("layer2");
-            aboba.setAttribute("display", "none")
-
             let drawData = convertRawDataToDrawData(data);
+
+            const citiesLayer = document.getElementById("layer2");
+            citiesLayer.setAttribute("display", "none")
 
             removePreviouslyRenderedElements(svgElement);
 
@@ -27,7 +26,9 @@ function PrettyMap({data, childId, children}) {
                 drawLines(drawData, center, isLineAnimated, svgElement);
             }
 
-            if (doDrawNumbers || doDrawLines) {
+            let isObninskWithData = drawData.some((va) => {return (va.id === obninskId) && (va.count > 0)});
+
+            if ((doDrawNumbers || doDrawCircles) && isObninskWithData) {
                 let obninsk_element = svgElement.getElementById(obninskId);
                 let obninsk_box = obninsk_element.getBBox();
 
