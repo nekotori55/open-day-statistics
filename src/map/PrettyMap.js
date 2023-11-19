@@ -23,6 +23,22 @@ function PrettyMap({data, childId, children}) {
             if (doDrawLines) {
                 drawLines(drawData, center, isLineAnimated, svgElement);
             }
+
+            if (doDrawNumbers || doDrawLines) {
+                let obninsk_element = svgElement.getElementById(obninskId);
+                let obninsk_box = obninsk_element.getBBox();
+
+                let vinoska_center = calcElementPosition(obninsk_box, obninskId);
+                let obninsk_center = calcElementPosition(obninsk_box);
+
+                let helper_line = createLineElement("helper_line",
+                    vinoska_center,
+                    obninsk_center,
+                    false,
+                    1,
+                    "#606060"
+                );
+                svgElement.append(helper_line);
             }
 
             if (doDrawCircles) {
