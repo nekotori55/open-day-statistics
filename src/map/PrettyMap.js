@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
-const obninskId = "kl_26";
-const bananaId = "kl_19";
+const obninskId = "kl_obn";
+const bananaId = "kl_suh";
 
 function PrettyMap({data, childId, children}) {
     const [currentData, setCurrentData] = useState([]);
@@ -11,10 +11,13 @@ function PrettyMap({data, childId, children}) {
     let doDrawCircles = true;
     let isLineAnimated = true;
 
-    let center = "kl_25";
+    let center = "kl_kal_dot";
 
     useEffect(() => {
             const svgElement = document.getElementById(childId);
+
+            const aboba = document.getElementById("layer2");
+            aboba.setAttribute("display", "none")
 
             let drawData = convertRawDataToDrawData(data);
 
@@ -38,7 +41,7 @@ function PrettyMap({data, childId, children}) {
                     1,
                     "#606060"
                 );
-                svgElement.append(helper_line);
+                render(svgElement, helper_line);
             }
 
             if (doDrawCircles) {
@@ -88,7 +91,7 @@ function drawNumbers(drawData, root) {
 
             let textElement = createTextElement(regionId, regionRectCenter, count);
 
-            root.append(textElement);
+            render(root, textElement)
         }
     }
 }
@@ -115,8 +118,8 @@ function calcElementPosition(regionRect, regionId = "") {
         regionRectCenter.x += 25;
     }
     if (regionId === obninskId) {
-        regionRectCenter.x += 70;
-        regionRectCenter.y -= 30;
+        regionRectCenter.x += 65;
+        regionRectCenter.y -= 40;
     }
 
     return regionRectCenter;
@@ -135,7 +138,7 @@ function drawCircles(drawData, root) {
 
             let circleElement = createCircleElement(regionId, regionRectCenter, count);
 
-            root.append(circleElement);
+            render(root, circleElement);
         }
     }
 }
@@ -170,6 +173,12 @@ function createLineElement(regionId, regionRectCenter, targetRectCenter, isLineA
     return lineElement;
 }
 
+function render(root, element) {
+    // let render_before = root.getElementById("outline_layer");
+    // root.insertBefore(element, render_before);
+    root.append(element)
+}
+
 function drawLines(drawData, targetId, isLineAnimated, root) {
     let targetElement = root.getElementById(targetId);
     let lineTargetRect = targetElement.getBBox();
@@ -200,7 +209,7 @@ function drawLines(drawData, targetId, isLineAnimated, root) {
                     isLineAnimated,
                     count);
 
-                root.append(lineElement);
+                render(root, lineElement);
             }
         }
     }
