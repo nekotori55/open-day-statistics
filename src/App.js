@@ -6,7 +6,11 @@ import PrettyMap from "./map/PrettyMap";
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import KalugaOblastSVG from "./map/KlgMap";
-import LeadersTable from "./table/LeadersTable"; // Optional theme CSS
+import LeadersTable from "./table/LeadersTable";
+import Header from "./header/Header"; // Optional theme CSS
+import Form from "./form/Form";
+
+// import {FilterComponent} from "ag-grid-community/dist/lib/components/framework/componentTypes";
 
 
 function App() {
@@ -32,6 +36,7 @@ function App() {
                     console.log("Fetch Error :-S", err);
                 })
         }
+
         update()
 
         const id = setInterval(() => update()
@@ -42,14 +47,31 @@ function App() {
     const map_id = 'kal_map'
     return (
         <div className="App">
-            <div className="Map-container">
-                <PrettyMap data={data} childId={map_id} key={data}>
-                    <KalugaOblastSVG id={map_id}/>
-                </PrettyMap>
-            </div>
+            <Header/>
+            <div className="main-content">
+                <div className="information">
+                    <div className="Leaders-table-container">
+                        <LeadersTable rowData={data}/>
+                    </div>
 
-            <div className="Leaders-table-container">
-                <LeadersTable rowData={data}/>
+                    <div className="Map-container">
+                        <PrettyMap data={data} childId={map_id} key={data}>
+                            <KalugaOblastSVG id={map_id}/>
+                        </PrettyMap>
+                    </div>
+                </div>
+                <input type="checkbox" id="hide-checkbox"/>
+                <div className="hide-button-container">
+                    <label className="hide-button" for="hide-checkbox">
+                        <span className="off">❮</span>
+                        <span className="on">❯</span>
+                    </label>
+                </div>
+                <div className="form">
+                    <div className="form-container">
+                        <Form/>
+                    </div>
+                </div>
             </div>
         </div>
     );
