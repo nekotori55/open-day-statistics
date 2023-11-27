@@ -19,6 +19,7 @@ function Select(props) {
 
     const onSelect = (selected) => {
         setValue(selected);
+        props.stateHandler(selected);
     }
 
     return(
