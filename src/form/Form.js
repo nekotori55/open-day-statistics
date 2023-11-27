@@ -34,7 +34,7 @@ function Form(props) {
             <div className="form-title">Анкета</div>
 
             <Select stateHandler={handleRegion} data={props.regions} placeholder="Область"/>
-            {region === "Калуга" ? (
+            {region === "Калужская" ? (
                 <Select stateHandler={handleDistrict} data={props.districts} placeholder="Район"/>
             ) : (
                 <input className={"inactive-form-select"} placeholder={"Район"} readOnly={true}/>
@@ -53,7 +53,6 @@ function Form(props) {
             </label>
 
             <button onClick={submit} className="form-button">Отправить</button>
-            <div>{region}{district}{school}{withParents}</div>
         </div>
     )
 }
