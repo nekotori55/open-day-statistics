@@ -4,9 +4,9 @@ import Select from "../select/Select";
 import {useState} from "react";
 
 function Form(props) {
-    const [region , setRegion] = useState('');
-    const [district , setDistrict] = useState('');
-    const [school , setSchool] = useState('');
+    const [region, setRegion] = useState('');
+    const [district, setDistrict] = useState('');
+    const [school, setSchool] = useState('');
     const [withParents, setParents] = useState();
 
     const handleRegion = (newRegion) => {
@@ -34,8 +34,17 @@ function Form(props) {
             <div className="form-title">Анкета</div>
 
             <Select stateHandler={handleRegion} data={props.regions} placeholder="Область"/>
-            <Select stateHandler={handleDistrict} data={props.districts} placeholder="Район"/>
-            <Select stateHandler={handleSchool} data={props.schools} placeholder="Школа"/>
+            {region === "Калуга" ? (
+                <Select stateHandler={handleDistrict} data={props.districts} placeholder="Район"/>
+            ) : (
+                <input className={"inactive-form-select"} placeholder={"Район"} readOnly={true}/>
+            )}
+
+            {district === "Калуга" ? (
+                <Select stateHandler={handleSchool} data={props.schools} placeholder="Школа"/>
+            ) : (
+                <input className={"inactive-form-select"} placeholder={"Школа"} readOnly={true}/>
+            )}
 
             <label className="parents-check">
                 <input type="checkbox" checked={withParents} onChange={handleParents}/>
@@ -44,6 +53,7 @@ function Form(props) {
             </label>
 
             <button onClick={submit} className="form-button">Отправить</button>
+            <div>{region}{district}{school}{withParents}</div>
         </div>
     )
 }

@@ -41,20 +41,21 @@ input:checked+.fake-checkbox {
     background-size: 80% auto;
 }
 
-.form-select {
+.inactive-form-select {
     margin-bottom: 18px;
     width: calc(100% - 18px);
     line-height: 53px;
     padding-left: 13px;
     font-size: 14px;
     display: block;
-    background: #EFF0F2;
+    background: lightgrey;
     /*background: black;*/
     border-radius: 5px;
     border: 1px solid #EFF0F2;
     color: var(--black-color);
     outline: none;
     font-weight: 600;
+    cursor: not-allowed;
 }
 
 .form-button {
