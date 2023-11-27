@@ -6,7 +6,8 @@ function Select(props) {
     const [value , setValue] = useState('');
 
     const onChange = (event) => {
-        setValue(event.target.value)
+        setValue(event.target.value);
+        props.stateHandler(event.target.value);
     }
 
     const compare = (item) => {
