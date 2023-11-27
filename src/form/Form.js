@@ -1,42 +1,44 @@
-import './Form.css'
-import '../select/Select'
+import "./Form.css";
+import "../select/Select";
 import Select from "../select/Select";
 import {useState} from "react";
 
 function Form(props) {
-    const [region, setRegion] = useState('');
-    const [district, setDistrict] = useState('');
-    const [school, setSchool] = useState('');
+    const [region, setRegion] = useState("");
+    const [district, setDistrict] = useState("");
+    const [school, setSchool] = useState("");
     const [withParents, setParents] = useState();
 
     const handleRegion = (newRegion) => {
         setRegion(newRegion);
-    }
+    };
 
     const handleDistrict = (newDistrict) => {
         setDistrict(newDistrict);
-    }
+    };
 
     const handleSchool = (newSchool) => {
-        setSchool(newSchool)
-    }
+        setSchool(newSchool);
+    };
 
     const handleParents = () => {
-        setParents(!withParents)
-    }
+        setParents(!withParents);
+    };
 
     const submit = () => {
-        let regionID = props.regions.find(item => item.region === region);
-        let districtID = props.districts.find(item => item.region === region);
-        let schoolID = props.schools.find(item => item.region === region);
-        fetch('/api/add_data/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ region: regionID, district: districtID, school: schoolID }),
+        fetch("/api/add_data/", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({region: region, district: district, school: school})
+        }).then((response) => {
+            console.log(response);
         });
-    }
+
+        props.submit_callback()
+    };
 
     return (
         <div className="form-background">
@@ -63,7 +65,7 @@ function Form(props) {
 
             <button onClick={submit} className="form-button">Отправить</button>
         </div>
-    )
+    );
 }
 
 export default Form;
