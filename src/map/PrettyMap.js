@@ -56,7 +56,7 @@ function PrettyMap({data, childId, children}) {
             setCurrentData(drawData);
         }
         ,
-        [JSON.stringify(data)]
+        [data]
     );
 
     return (children);
