@@ -23,20 +23,25 @@
     position: absolute;
     width: 100%;
     z-index: 1000;
-    box-sizing: border-box;
+    background: #EFF0F2;
+    border-radius: 5px;
+    border: 1px solid #EFF0F2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:empty {
+    display: none;
 }
 
 .dropdown-row {
     display: block;
     padding-left: 13px;
-    line-height: 53px;
+    line-height: 32px;
     font-size: 14px;
-    background: #EFF0F2;
     /*background: black;*/
-    border-radius: 5px;
-    border: 1px solid #EFF0F2;
-    border-top: 1px solid var(--gray-color);
+    /*border-top: 1px solid var(--gray-color);*/
     color: var(--black-color);
     outline: none;
     cursor: pointer;
+    text-align: start;
 }
