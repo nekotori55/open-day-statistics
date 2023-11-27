@@ -7,6 +7,7 @@ function Form(props) {
     const [region , setRegion] = useState('');
     const [district , setDistrict] = useState('');
     const [school , setSchool] = useState('');
+    const [withParents, setParents] = useState()
 
     const handleRegion = (newRegion) => {
         setRegion(newRegion);
@@ -20,6 +21,10 @@ function Form(props) {
         setSchool(newSchool)
     }
 
+    const handleParents = () => {
+        setParents(!withParents)
+    }
+
     return (
         <div className="form-background">
             <div className="form-title">Анкета</div>
@@ -29,7 +34,7 @@ function Form(props) {
             <Select stateHandler={handleSchool} data={props.schools} placeholder="Школа"/>
 
             <label className="parents-check">
-                <input type="checkbox" name="parents"/>
+                <input type="checkbox" checked={withParents} onChange={handleParents}/>
                 <span className="fake-checkbox"></span>
                 <span className="checkbox-label">Приехал с родителями?</span>
             </label>
