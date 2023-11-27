@@ -1,13 +1,15 @@
 import './Form.css'
+import '../select/Select'
+import Select from "../select/Select";
 
-function Form() {
+function Form(props) {
     return (
         <div className="form-background">
             <div className="form-title">Анкета</div>
 
-            <input type="text" className="form-select" name="region" placeholder="Область"/>
-            <input type="text" className="form-select" name="district" placeholder="Район"/>
-            <input type="text" className="form-select" name="school" placeholder="Школа"/>
+            <Select data={props.regions} placeholder="Область"/>
+            <Select data={props.districts} placeholder="Район"/>
+            <Select data={props.schools} placeholder="Школа"/>
 
             <label className="parents-check">
                 <input type="checkbox" name="parents"/>
