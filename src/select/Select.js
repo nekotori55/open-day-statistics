@@ -22,10 +22,10 @@ function Select(props) {
 
     return(
         <div className="select">
-            <input type="text" value={value} onChange={onChange} />
+            <input type="text" value={value} onChange={onChange} placeholder={props.placeholder}/>
             <div className="dropdown">
                 {props.data.filter(compare).map((item) => (
-                    <div key={item.id} className="dropdown-raw" onClick={() => onSelect(item.region)}>
+                    <div key={item.id} className="dropdown-row" onClick={() => onSelect(item.region)}>
                         {item.region}
                     </div>
                 ))}

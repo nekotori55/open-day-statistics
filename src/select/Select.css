@@ -1,5 +1,42 @@
 
+.select {
+    position: relative;
+    margin-bottom: 18px;
+}
 
 .select input {
+    width: calc(100% - 18px);
     display: block;
+    padding-left: 13px;
+    line-height: 53px;
+    font-size: 14px;
+    background: #EFF0F2;
+    /*background: black;*/
+    border-radius: 5px;
+    border: 1px solid #EFF0F2;
+    color: var(--black-color);
+    outline: none;
+    font-weight: 600;
+}
+
+.dropdown {
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.dropdown-row {
+    display: block;
+    padding-left: 13px;
+    line-height: 53px;
+    font-size: 14px;
+    background: #EFF0F2;
+    /*background: black;*/
+    border-radius: 5px;
+    border: 1px solid #EFF0F2;
+    border-top: 1px solid var(--gray-color);
+    color: var(--black-color);
+    outline: none;
+    cursor: pointer;
 }
