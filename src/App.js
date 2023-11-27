@@ -69,7 +69,7 @@ function App() {
                 </div>
                 <div className="form">
                     <div className="form-container">
-                        <Form/>
+                        <Form regions={data} districts={data} schools={data}/>
                     </div>
                 </div>
             </div>

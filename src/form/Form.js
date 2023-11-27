@@ -26,7 +26,16 @@ function Form(props) {
     }
 
     const submit = () => {
-        return;
+        let regionID = props.regions.find(item => item.region === region);
+        let districtID = props.districts.find(item => item.region === region);
+        let schoolID = props.schools.find(item => item.region === region);
+        fetch('/api/add_data/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ region: regionID, district: districtID, school: schoolID }),
+        });
     }
 
     return (
