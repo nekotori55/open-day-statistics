@@ -15,7 +15,7 @@ function KalugaBarChart(props: { data: [] }) {
         >
             <CartesianGrid strokeDasharray={"3 3"}/>
             <XAxis dataKey="count" type={"number"}/>
-            <YAxis dataKey="region" type={"category"}/>
+            <YAxis dataKey="name" type={"category"}/>
             <Legend/>
             <Bar dataKey="count" name={"Количество"} fill="#8884d8" label={{fill: "white"}}/>
         </BarChart>

@@ -10,6 +10,8 @@ import LeadersTable from "./table/LeadersTable";
 import Header from "./header/Header"; // Optional theme CSS
 import Form from "./form/Form";
 import Nav from "./navigation menu/Nav";
+import {Charts} from "./charts/Charts";
+import RussiaSVG from "./map/RuMap";
 
 let districts = require("./districts.json")
 let regions = require("./regions.json")
@@ -44,6 +46,12 @@ function App() {
             , 5000);
     }, []);
 
+    const class_data = [
+        {class: "<8", count: 12},
+        {class: "9", count: 7},
+        {class: "10", count: 17},
+        {class: "11", count: 25},
+    ];
     const renderTab = (active_tab) => {
         switch (active_tab) {
             case 0:
@@ -53,15 +61,27 @@ function App() {
                     </div>
 
                     <div className="Map-container">
-                        <PrettyMap data={data} childId={map_id} key={data}>
+                        <PrettyMap data={data} centerID={"kl_kal_dot"} childId={map_id} key={data}>
                             <KalugaOblastSVG id={map_id}/>
                         </PrettyMap>
                     </div>
                 </>
             case 1:
-                return <></>
+                return <>
+                    <div className="Leaders-table-container">
+                        <LeadersTable rowData={data}/>
+                    </div>
+
+                    <div className="Map-container">
+                        <PrettyMap data={data} centerID={"RU-KLU"} childId={map_id} key={data}>
+                            <RussiaSVG id={map_id}/>
+                        </PrettyMap>
+                    </div>
+                </>
             case 2:
-                return <></>
+                return <>
+                    <Charts district_data={[]} class_data={class_data} region_data={[]}/>
+                </>
 
         }
     }

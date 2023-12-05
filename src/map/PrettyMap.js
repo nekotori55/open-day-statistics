@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 const obninskId = "kl_obn";
 const bananaId = "kl_suh";
 
-function PrettyMap({data, childId, children}) {
+function PrettyMap({data, centerID, childId, children}) {
     const [currentData, setCurrentData] = useState([]);
 
     let doDrawLines = true;
@@ -11,7 +11,7 @@ function PrettyMap({data, childId, children}) {
     let doDrawCircles = true;
     let isLineAnimated = true;
 
-    let center = "kl_kal_dot";
+    let center = centerID;
 
     useEffect(() => {
             const svgElement = document.getElementById(childId);
