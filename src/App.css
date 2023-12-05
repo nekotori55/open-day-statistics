@@ -46,6 +46,13 @@
 .information {
     flex-grow: 1;
     display: flex;
+    flex-direction: column;
+}
+
+.information .content {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .form {

@@ -9,6 +9,8 @@ import KalugaOblastSVG from "./map/KlgMap";
 import LeadersTable from "./table/LeadersTable";
 import Header from "./header/Header"; // Optional theme CSS
 import Form from "./form/Form";
+import Nav from "./navigation menu/Nav";
+
 let districts = require("./districts.json")
 let regions = require("./regions.json")
 let schools = require("./schools.json")
@@ -18,6 +20,7 @@ let schools = require("./schools.json")
 
 function App() {
     const [data, setData] = useState([]);
+    const [active_tab, setActiveTab] = useState(0);
 
     const update = () => {
         fetch("/api/get_data/")
@@ -41,13 +44,10 @@ function App() {
             , 5000);
     }, []);
 
-
-    const map_id = "kal_map";
-    return (
-        <div className="App">
-            <Header/>
-            <div className="main-content">
-                <div className="information">
+    const renderTab = (active_tab) => {
+        switch (active_tab) {
+            case 0:
+                return <>
                     <div className="Leaders-table-container">
                         <LeadersTable rowData={data}/>
                     </div>
@@ -56,6 +56,27 @@ function App() {
                         <PrettyMap data={data} childId={map_id} key={data}>
                             <KalugaOblastSVG id={map_id}/>
                         </PrettyMap>
+                    </div>
+                </>
+            case 1:
+                return <></>
+            case 2:
+                return <></>
+
+        }
+    }
+
+
+    const map_id = "kal_map";
+    return (
+        <div className="App">
+            <Header/>
+            <div className="main-content">
+                <div className="information">
+                    <Nav handleActive={(value) => setActiveTab(value)}/>
+                    <div className="content">
+                        {renderTab(active_tab)}
+
                     </div>
                 </div>
                 <input type="checkbox" id="hide-checkbox"/>
