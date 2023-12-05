@@ -1,7 +1,7 @@
 import {
     Bar,
     BarChart,
-    CartesianGrid,
+    CartesianGrid, Cell,
     Legend,
     Pie,
     PieChart,
@@ -11,67 +11,41 @@ import {
     YAxis
 } from "recharts";
 import React from "react";
+import KalugaBarChart from "./KalugaBarChart";
+import ClassPieChart from "./ClassPieChart";
+import RegionBarChart from "./RegionBarChart";
 import "./charts.css";
 
-export function Charts(props: { data: [] }) {
+
+export function Charts(props: { district_data: [], class_data: [], region_data: [] }) {
+
+    const COLORS = [
+        "#EAB0E3",
+        "#F0A8A8",
+        "#95DBDA",
+        "#9BAADD",
+        "#F2EAC4"
+    ];
+
     return <div className={"charts-wrapper"}>
-        <ResponsiveContainer width={"50%"} height={"50%"} className={"left-top"}>
-            <BarChart
-                data={props.data}
-                layout={"vertical"}
-                margin={{
-                    top: 20,
-                    right: 20,
-                    bottom: 20,
-                    left: 120
-                }}
-            >
-                <CartesianGrid strokeDasharray={"3 3"}/>
-                <XAxis dataKey="count" type={"number"}/>
-                <YAxis dataKey="region" type={"category"}/>
-                <Legend/>
-                <Bar dataKey="count" name={"Количество"} fill="#8884d8" label={{fill: "white"}}/>
-            </BarChart>
-        </ResponsiveContainer>
+        <KalugaBarChart data={props.district_data}
+                        width={"50%"}
+                        height={"50%"}
+                        className={"left-top"}/>
 
-        <ResponsiveContainer width={"50%"} height={"50%"} className={"left-bottom"}>
-            <PieChart
-                margin={{
-                    top: 20,
-                    right: 20,
-                    bottom: 20,
-                    left: 40
-                }}
-            >
-                <Pie data={props.data} dataKey={"count"} nameKey={"region"} label={{fill: "black"}}/>
-                <Tooltip/>
-                <Legend layout={"vertical"} verticalAlign={"top"} align={"left"}/>
-            </PieChart>
-        </ResponsiveContainer>
+        <ClassPieChart data={props.class_data}
+                       callbackfn={(entry, index) => (
+                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}/>
+                       )}
+                       width={"50%"}
+                       height={"50%"}
+                       className={"left-bottom"}/>
 
-        <ResponsiveContainer width={"50%"} height={"50%"} className={"right-top"}>
-            <BarChart data={props.data} layout={"vertical"}
-                      margin={{top: 20, right: 20, bottom: 20, left: 120}}
-            >
-                <CartesianGrid strokeDasharray={"3 3"}/>
-                <XAxis dataKey="count" type={"number"}/>
-                <YAxis dataKey="region" type={"category"}/>
-                <Legend/>
-                <Bar dataKey="count" name={"Количество"} fill="#8884d8" label={{fill: "white"}}/>
-            </BarChart>
-        </ResponsiveContainer>
+        <RegionBarChart data={props.region_data}
+                        width={"50%"}
+                        height={"100%"}
+                        className={"right-top"}/>
 
-
-        <ResponsiveContainer width={"50%"} height={"50%"} className={"right-bottom"}>
-            <BarChart data={props.data} layout={"vertical"}
-                      margin={{top: 20, right: 20, bottom: 20, left: 100}}
-            >
-                <CartesianGrid strokeDasharray={"3 3"}/>
-                <XAxis dataKey="count" type={"number"}/>
-                <YAxis dataKey="region" type={"category"}/>
-                <Legend/>
-                <Bar dataKey="count" name={"Количество"} fill="#8884d8" label={{fill: "white"}}/>
-            </BarChart>
-        </ResponsiveContainer>
     </div>;
+
 }
