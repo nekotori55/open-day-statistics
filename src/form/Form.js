@@ -45,7 +45,7 @@ function Form(props) {
             <div className="form-title">Анкета</div>
 
             <Select stateHandler={handleRegion} data={props.regions} placeholder="Область"/>
-            {region === "Калужская" ? (
+            {region === "Калужская область" ? (
                 <Select stateHandler={handleDistrict} data={props.districts} placeholder="Район"/>
             ) : (
                 <input className={"inactive-form-select"} placeholder={"Район"} readOnly={true}/>

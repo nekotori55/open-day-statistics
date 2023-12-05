@@ -9,6 +9,9 @@ import KalugaOblastSVG from "./map/KlgMap";
 import LeadersTable from "./table/LeadersTable";
 import Header from "./header/Header"; // Optional theme CSS
 import Form from "./form/Form";
+let districts = require("./districts.json")
+let regions = require("./regions.json")
+let schools = require("./schools.json")
 
 // import {FilterComponent} from "ag-grid-community/dist/lib/components/framework/componentTypes";
 
@@ -64,7 +67,7 @@ function App() {
                 </div>
                 <div className="form">
                     <div className="form-container">
-                        <Form regions={data} districts={data} schools={data} submit_callback={update}/>
+                        <Form regions={regions} districts={districts} schools={schools} submit_callback={update}/>
                     </div>
                 </div>
             </div>

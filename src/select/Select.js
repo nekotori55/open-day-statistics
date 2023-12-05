@@ -12,9 +12,9 @@ function Select(props) {
 
     const compare = (item) => {
         const searchText = value.toLowerCase();
-        const searchData = item.region.toLowerCase();
+        const searchData = item.name.toLowerCase();
 
-        return searchText && searchData.startsWith(searchText) && searchText !== searchData;
+        return searchText && searchData.includes(searchText) && searchText !== searchData;
     }
 
     const onSelect = (selected) => {
@@ -27,8 +27,8 @@ function Select(props) {
             <input type="text" value={value} onChange={onChange} placeholder={props.placeholder}/>
             <div className="dropdown">
                 {props.data.filter(compare).map((item) => (
-                    <div key={item.id} className="dropdown-row" onClick={() => onSelect(item.region)}>
-                        {item.region}
+                    <div key={item.id} className="dropdown-row" onClick={() => onSelect(item.name)}>
+                        {item.name}
                     </div>
                 ))}
             </div>
