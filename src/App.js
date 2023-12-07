@@ -23,6 +23,7 @@ let schools = require("./schools.json")
 function App() {
     const [region_data, setRegionData] = useState([]);
     const [district_data, setDistrictData] = useState([]);
+    const [class_data, setClassData] = useState([]);
     const [active_tab, setActiveTab] = useState(0);
 
     const update = () => {
@@ -35,6 +36,7 @@ function App() {
                 response.json().then(data1 => {
                     setRegionData(data1.regions)
                     setDistrictData(data1.districts)
+                    setClassData(data1.classes)
                 });
             })
             .catch(function (err) {
@@ -48,12 +50,7 @@ function App() {
             , 5000);
     }, []);
 
-    const class_data = [
-        {class: "<8", count: 12},
-        {class: "9", count: 7},
-        {class: "10", count: 17},
-        {class: "11", count: 25},
-    ];
+
     const renderTab = (active_tab) => {
         switch (active_tab) {
             case 0:
@@ -82,7 +79,7 @@ function App() {
                 </>
             case 2:
                 return <>
-                    <Charts district_data={[]} class_data={class_data} region_data={[]}/>
+                    <Charts district_data={district_data} class_data={class_data} region_data={region_data}/>
                 </>
 
         }

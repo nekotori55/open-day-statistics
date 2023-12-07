@@ -11,8 +11,6 @@ def get_db_connection_row():
     return conn
 
 
-
-
 @app.route('/api/form_data/')
 def get_form_data():
     data = {}
@@ -60,8 +58,16 @@ def get_count_data():
                              '').fetchall()
     districts = [dict(row) for row in districts]
 
+    classes = conn.execute(''
+                           'select visitors.study_class as class, count(*) as count '
+                           'from visitors '
+                           'group by visitors.study_class '
+                           '')
+    classes = [dict(row) for row in classes]
+
     data['regions'] = regions
     data['districts'] = districts
+    data['classes'] = classes
 
     return jsonify(data)
 
@@ -90,10 +96,6 @@ def add__data():
         conn.commit()
 
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
-
-
-
-
 
 
 if __name__ == '__main__':
