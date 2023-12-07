@@ -4,6 +4,7 @@
     --blue-color-hover: #1562D3;
     --black-color: #292C33;
     --gray-color: #A2A3A3;
+
 }
 
 @font-face {
@@ -66,7 +67,7 @@
 
 
 .Leaders-table-container {
-    align-self: end;
+    align-self: center;
     height: 30%;
     width: 30%;
 }
