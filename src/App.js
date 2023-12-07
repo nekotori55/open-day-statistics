@@ -93,7 +93,11 @@ function App() {
             <Header/>
             <div className="main-content">
                 <div className="information">
-                    <Nav handleActive={(value) => setActiveTab(value)}/>
+                    <div className="content-header">
+                        <Nav handleActive={(value) => setActiveTab(value)}/>
+                        <h1>День открытых дверей</h1>
+                        <div></div>
+                    </div>
                     <div className="content">
                         {renderTab(active_tab)}
 
