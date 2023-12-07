@@ -17,8 +17,8 @@ function PrettyMap({data, centerID, childId, children}) {
             const svgElement = document.getElementById(childId);
             let drawData = convertRawDataToDrawData(data);
 
-            const citiesLayer = document.getElementById("layer2");
-            citiesLayer.setAttribute("display", "none")
+            // const citiesLayer = document.getElementById("layer2");
+            // citiesLayer.setAttribute("display", "none")
 
             removePreviouslyRenderedElements(svgElement);
 
