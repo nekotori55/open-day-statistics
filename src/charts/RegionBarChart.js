@@ -1,4 +1,4 @@
-import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, XAxis, YAxis} from "recharts";
+import {Bar, BarChart, CartesianGrid, Label, Legend, ResponsiveContainer, XAxis, YAxis} from "recharts";
 import React from "react";
 import KalugaBarChart from "./KalugaBarChart";
 
@@ -9,8 +9,7 @@ function RegionBarChart(props: { data: [] }) {
         >
             <CartesianGrid strokeDasharray={"3 3"}/>
             <XAxis dataKey="count" type={"number"}/>
-            <YAxis dataKey="name" type={"category"} width={200}/>
-            <Legend/>
+            <YAxis dataKey="name" type={"category"}/>
             <Bar dataKey="count" name={"Количество"} fill="#8884d8" label={{fill: "white"}}/>
         </BarChart>
     </ResponsiveContainer>;

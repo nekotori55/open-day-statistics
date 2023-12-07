@@ -9,11 +9,11 @@ const LeadersTable = ({rowData}) => {
         {
             headerName: 'Регион',
             field: 'name',
-            flex: 1,
+            flex: 2,
             cellClass: "leader-table-cell",
         },
         {
-            headerName: 'Количество',
+            headerName: 'Кол-во',
             field: 'count',
             flex: 1,
             sort: 'desc',

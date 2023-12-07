@@ -22,7 +22,7 @@ function PrettyMap({data, centerID, childId, children}) {
     }
 
     useEffect(() => {
-            const svgElement = document.getElementById(childId);
+            let svgElement = document.getElementById(childId);
             let drawData = convertRawDataToDrawData(data);
 
             // const citiesLayer = document.getElementById("layer2");

@@ -5,9 +5,9 @@ function KalugaOblastSVG(props) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      {...props}
       version="1.1"
       xmlSpace="preserve"
+      id="klg_map"
       viewBox="0 0 500 500"
     >
       <g

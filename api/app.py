@@ -65,9 +65,14 @@ def get_count_data():
                            '')
     classes = [dict(row) for row in classes]
 
+    amount = conn.execute(''
+                          'select count(1) from visitors'
+                          '').fetchone()[0]
+
     data['regions'] = regions
     data['districts'] = districts
     data['classes'] = classes
+    data['amount'] = amount
 
     return jsonify(data)
 

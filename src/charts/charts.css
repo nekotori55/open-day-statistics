@@ -32,6 +32,23 @@
     bottom: 0;
 }
 
+.recharts-pie-label-text {
+    font-size: x-large;
+    dominant-baseline: middle;
+}
+
+.recharts-legend-item-text {
+    color: black !important;
+    font-size: large;
+}
+
+.recharts-legend-item-text:after {
+    content: " класс"
+}
+
+.legend-item-0 .recharts-legend-item-text:first-of-type:before {
+    content: "≤";
+}
 .charts-wrapper h2 {
     margin: 0;
 }

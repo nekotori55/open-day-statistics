@@ -50,10 +50,12 @@ function App() {
             , 5000);
     }, []);
 
+    let map_id = "kal_map";
 
     const renderTab = (active_tab) => {
         switch (active_tab) {
             case 0:
+                map_id = 'kal_map'
                 return <>
                     <div className="applicants">
                         <div className="applicants-count">
@@ -67,12 +69,13 @@ function App() {
                     </div>
 
                     <div className="Map-container">
-                        <PrettyMap data={district_data} centerID={"kl_kal_dot"} childId={map_id}>
-                            <KalugaOblastSVG id={map_id}/>
+                        <PrettyMap data={district_data} centerID={"kl_kal_dot"} childId={"klg_map"}>
+                            <KalugaOblastSVG/>
                         </PrettyMap>
                     </div>
                 </>
             case 1:
+                map_id = 'russ_map'
                 return <>
                     <div className="applicants">
                         <div className="applicants-count">
@@ -85,11 +88,11 @@ function App() {
                         </div>
                     </div>
 
-                    <div className="Map-container">
-                        <PrettyMap data={region_data} centerID={"RU-KLU"} childId={"rus_map"}>
-                            <RussiaSVG id={"rus_map"}/>
-                        </PrettyMap>
-                    </div>
+                        <div className="Map-container">
+                            <PrettyMap data={region_data} centerID={"RU-KLU"} childId={"rus_map"}>
+                                <RussiaSVG/>
+                            </PrettyMap>
+                        </div>
                 </>
             case 2:
                 return <>
@@ -98,9 +101,6 @@ function App() {
 
         }
     }
-
-
-    const map_id = "kal_map";
     return (
         <div className="App">
             <Header/>
