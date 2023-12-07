@@ -1,12 +1,13 @@
 import React from "react";
 
-function RussiaSVG() {
+function RussiaSVG(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fillRule="evenodd"
       clipRule="evenodd"
       version="1.1"
+      {...props}
       viewBox="0 0 3168.196 2731.111"
     >
       <defs id="defs4">

@@ -21,7 +21,8 @@ let schools = require("./schools.json")
 
 
 function App() {
-    const [data, setData] = useState([]);
+    const [region_data, setRegionData] = useState([]);
+    const [district_data, setDistrictData] = useState([]);
     const [active_tab, setActiveTab] = useState(0);
 
     const update = () => {
@@ -32,7 +33,8 @@ function App() {
                     return;
                 }
                 response.json().then(data1 => {
-                    setData(data1);
+                    setRegionData(data1.regions)
+                    setDistrictData(data1.districts)
                 });
             })
             .catch(function (err) {
@@ -57,11 +59,11 @@ function App() {
             case 0:
                 return <>
                     <div className="Leaders-table-container">
-                        <LeadersTable rowData={data.districts}/>
+                        <LeadersTable rowData={district_data}/>
                     </div>
 
                     <div className="Map-container">
-                        <PrettyMap data={data.districts} centerID={"kl_kal_dot"} childId={map_id}>
+                        <PrettyMap data={district_data} centerID={"kl_kal_dot"} childId={map_id}>
                             <KalugaOblastSVG id={map_id}/>
                         </PrettyMap>
                     </div>
@@ -69,11 +71,11 @@ function App() {
             case 1:
                 return <>
                     <div className="Leaders-table-container">
-                        <LeadersTable rowData={data.regions}/>
+                        <LeadersTable rowData={region_data}/>
                     </div>
 
                         <div className="Map-container">
-                            <PrettyMap data={data.regions} centerID={"RU-KLU"} childId={"rus_map"}>
+                            <PrettyMap data={region_data} centerID={"RU-KLU"} childId={"rus_map"}>
                                 <RussiaSVG id={"rus_map"}/>
                             </PrettyMap>
                         </div>

@@ -228,8 +228,10 @@ function convertRawDataToDrawData(data) {
 
 function removePreviouslyRenderedElements(root) {
     let renderedElements = root.getElementsByClassName("rendered");
-    while (renderedElements[0]) {
-        renderedElements[0].parentNode.removeChild(renderedElements[0]);
+    if (renderedElements !== null) {
+        while (renderedElements[0]) {
+            renderedElements[0].parentNode.removeChild(renderedElements[0]);
+        }
     }
 }
 
