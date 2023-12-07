@@ -4,9 +4,9 @@ import Select from "../select/Select";
 import {useState} from "react";
 
 function Form(props) {
-    const [region, setRegion] = useState();
-    const [district, setDistrict] = useState();
-    const [school, setSchool] = useState();
+    const [region, setRegion] = useState("");
+    const [district, setDistrict] = useState("");
+    const [school, setSchool] = useState("");
     const [school_class, setClass] = useState(11)
     const [withParents, setParents] = useState();
 

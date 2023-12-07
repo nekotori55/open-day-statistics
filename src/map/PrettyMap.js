@@ -69,7 +69,7 @@ function createTextElement(regionId, regionRectCenter, count) {
     textElement.setAttribute("y", regionRectCenter.y);
     textElement.setAttribute("text-anchor", "middle");
     textElement.setAttribute("alignment-baseline", "central");
-    textElement.setAttribute("font-size", count + 10);
+    textElement.setAttribute("font-size", Math.log(count*count) + 15);
     textElement.setAttribute("fill", "#ffffff");
     // textElement.setAttribute("r", 5 + count);
     textElement.classList.add("rendered");
@@ -102,7 +102,7 @@ function createCircleElement(regionId, regionRectCenter, count) {
     circleElement.setAttribute("id", regionId + "_circle");
     circleElement.setAttribute("cx", regionRectCenter.x);
     circleElement.setAttribute("cy", regionRectCenter.y);
-    circleElement.setAttribute("r", 5 + count);
+    circleElement.setAttribute("r", 10 + Math.log(count*count));
     circleElement.setAttribute("fill", "#3892f6");
     circleElement.classList.add("rendered");
     return circleElement;

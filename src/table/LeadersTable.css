@@ -5,9 +5,15 @@
     min-height: 261px;
 }
 
+.ag-header-cell-text {
+    color: white;
+}
+
 .ag-header-container {
     font-size: 18px;
     font-weight: bold;
+    background: var(--blue-color);
+    color: white !important;
 }
 
 .leader-table-cell {
