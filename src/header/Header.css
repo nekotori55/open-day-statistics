@@ -6,7 +6,7 @@ header {
 }
 
 .logo {
-    width: 280px;
+    width: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +15,7 @@ header {
 
 .logo-image img {
     display: block;
-    width: 40px;
+    width: 50px;
 }
 
 .logo-text {
@@ -23,7 +23,7 @@ header {
 }
 
 .logo-suptitle {
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.38em;
     line-height: 1.25;
@@ -33,7 +33,7 @@ header {
 }
 
 .logo-title {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     line-height: 1.1875;
     color: var(--black-color);
@@ -48,7 +48,7 @@ header {
 
 .faculty-name {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 19px;
     letter-spacing: 0.1em;
     margin-top: 2px;
     margin-bottom: 1px;
@@ -57,7 +57,7 @@ header {
 
 .department-name {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 19px;
     color: var(--black-color);
 }
 
