@@ -76,4 +76,23 @@ input:checked+.fake-checkbox {
     background: var(--blue-color-hover);
 }
 
+.class {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: row;
+    font-size: 18px;
+}
+
+.class select {
+    border: 1px solid var(--blue-color);
+    border-radius: 3px;
+    background: var(--blue-color-hover);
+    color: white;
+    padding: 2px;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-right: 15px;
+}
 

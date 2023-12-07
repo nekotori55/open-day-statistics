@@ -4,9 +4,10 @@ import Select from "../select/Select";
 import {useState} from "react";
 
 function Form(props) {
-    const [region, setRegion] = useState("");
-    const [district, setDistrict] = useState("");
-    const [school, setSchool] = useState("");
+    const [region, setRegion] = useState();
+    const [district, setDistrict] = useState();
+    const [school, setSchool] = useState();
+    const [school_class, setClass] = useState(11)
     const [withParents, setParents] = useState();
 
     const handleRegion = (newRegion) => {
@@ -25,6 +26,10 @@ function Form(props) {
         setParents(!withParents);
     };
 
+    const handleClass = (event) => {
+        setClass(event.target.value);
+    }
+
     const submit = () => {
         fetch("/api/add_data/", {
             method: "POST",
@@ -32,7 +37,7 @@ function Form(props) {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({region: region, district: district, school: school})
+            body: JSON.stringify({region: region, district: district, school: school, school_class: school_class, withParents: withParents})
         }).then((response) => {
             console.log(response);
         });
@@ -45,17 +50,27 @@ function Form(props) {
             <div className="form-title">Анкета</div>
 
             <Select stateHandler={handleRegion} data={props.regions} placeholder="Область"/>
-            {region === "Калужская область" ? (
+            {region === "RU-KLU" ? (
                 <Select stateHandler={handleDistrict} data={props.districts} placeholder="Район"/>
             ) : (
                 <input className={"inactive-form-select"} placeholder={"Район"} readOnly={true}/>
             )}
 
-            {district === "Калуга" ? (
+            {district === "kl_kal" ? (
                 <Select stateHandler={handleSchool} data={props.schools} placeholder="Школа"/>
             ) : (
                 <input className={"inactive-form-select"} placeholder={"Школа"} readOnly={true}/>
             )}
+
+            <div className="class">
+                <select onInput={handleClass} value={school_class}>
+                    <option value={11}>11</option>
+                    <option value={10}>10</option>
+                    <option value={9}>9</option>
+                    <option value={8}>≤8</option>
+                </select>
+                <label>класс</label>
+            </div>
 
             <label className="parents-check">
                 <input type="checkbox" checked={withParents} onChange={handleParents}/>

@@ -18,16 +18,16 @@ function Select(props) {
     }
 
     const onSelect = (selected) => {
-        setValue(selected);
-        props.stateHandler(selected);
+        setValue(selected.name);
+        props.stateHandler(selected.id);
     }
 
     return(
         <div className="select">
             <input type="text" value={value} onChange={onChange} placeholder={props.placeholder}/>
             <div className="dropdown">
-                {props.data.filter(compare).map((item) => (
-                    <div key={item.id} className="dropdown-row" onClick={() => onSelect(item.name)}>
+                {props.data.filter(compare).slice(0, 5).map((item) => (
+                    <div key={item.id} className="dropdown-row" onClick={() => onSelect(item)}>
                         {item.name}
                     </div>
                 ))}
