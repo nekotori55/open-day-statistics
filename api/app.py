@@ -38,28 +38,28 @@ def get_form_data():
     return jsonify(data)
 
 
-@app.route('/api/count_data')
+@app.route('/api/count_data/')
 def get_count_data():
     data = {}
     conn = get_db_connection_row()
 
     regions = conn.execute(''
-                           'SELECT regions.region_id as name, count(visitors.visitor_id) as count'
-                           'from regions'
-                           'left join visitors'
-                           'on (regions.region_id = visitors.region_id)'
-                           'group by'
-                           '    regions.region_id'
+                           'SELECT regions.region_id as id, regions.region_name as name, count(visitors.visitor_id) as count '
+                           'from regions '
+                           'left join visitors '
+                           'on (regions.region_id = visitors.region_id) '
+                           'group by '
+                           '    regions.region_id '
                            '').fetchall()
     regions = [dict(row) for row in regions]
 
     districts = conn.execute(''
-                             'SELECT districts.district_id as name, count(visitors.visitor_id) as count'
-                             'from districts'
-                             'left join visitors'
-                             'on (districts.district_id = visitors.district_id)'
-                             'group by'
-                             '   districts.district_id;'
+                             'SELECT districts.district_id as id, districts.district_name as name, count(visitors.visitor_id) as count '
+                             'from districts '
+                             'left join visitors '
+                             'on (districts.district_id = visitors.district_id) '
+                             'group by '
+                             '   districts.district_id; '
                              '').fetchall()
     districts = [dict(row) for row in districts]
 

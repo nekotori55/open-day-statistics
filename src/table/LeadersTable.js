@@ -8,7 +8,7 @@ const LeadersTable = ({rowData}) => {
     const [columnDefs, setColumnDefs] = useState([
         {
             headerName: 'Регион',
-            field: 'region',
+            field: 'name',
             flex: 1,
             cellClass: "leader-table-cell",
         },

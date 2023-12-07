@@ -25,7 +25,7 @@ function App() {
     const [active_tab, setActiveTab] = useState(0);
 
     const update = () => {
-        fetch("/api/get_data/")
+        fetch("/api/count_data/")
             .then(function (response) {
                 if (response.status !== 200) {
                     console.log("Looks like there was a problem. Status Code: " + response.status);
@@ -57,11 +57,11 @@ function App() {
             case 0:
                 return <>
                     <div className="Leaders-table-container">
-                        <LeadersTable rowData={data}/>
+                        <LeadersTable rowData={data.districts}/>
                     </div>
 
                     <div className="Map-container">
-                        <PrettyMap data={data} centerID={"kl_kal_dot"} childId={map_id} key={data}>
+                        <PrettyMap data={data.districts} centerID={"kl_kal_dot"} childId={map_id}>
                             <KalugaOblastSVG id={map_id}/>
                         </PrettyMap>
                     </div>
@@ -69,14 +69,14 @@ function App() {
             case 1:
                 return <>
                     <div className="Leaders-table-container">
-                        <LeadersTable rowData={data}/>
+                        <LeadersTable rowData={data.regions}/>
                     </div>
 
-                    <div className="Map-container">
-                        <PrettyMap data={data} centerID={"RU-KLU"} childId={map_id} key={data}>
-                            <RussiaSVG id={map_id}/>
-                        </PrettyMap>
-                    </div>
+                        <div className="Map-container">
+                            <PrettyMap data={data.regions} centerID={"RU-KLU"} childId={"rus_map"}>
+                                <RussiaSVG id={"rus_map"}/>
+                            </PrettyMap>
+                        </div>
                 </>
             case 2:
                 return <>
