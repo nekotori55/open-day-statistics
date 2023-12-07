@@ -10,10 +10,7 @@ def get_db_connection_row():
     conn.row_factory = sqlite3.Row
     return conn
 
-def get_db_connection_cur():
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    return cursor
+
 
 
 @app.route('/api/form_data/')
@@ -77,17 +74,20 @@ def add__data():
 
         a = request.get_json()
 
-        with_relatives = True if a['withParents'] == 1 else False
-        school_class = a['school_class']
-        region = a['region'] if a['region'] != '' else None
-        district = a['district'] if a['discrict'] != '' else None
-        school = a['school'] if a['school'] != '' else None
+        with_relatives = True if a.get('withParents') == 1 else False
+        school_class = a.get('school_class')
+        region = a.get('region') if a.get('region') != '' else None
+        district = a.get('district') if a.get('discrict') != '' else None
+        school = a.get('school') if a.get('school') != '' else None
 
         data_tuple = (with_relatives, school_class, region, district, school)
 
-        cur = get_db_connection_cur()
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
 
         cur.execute(sql_query, data_tuple)
+
+        conn.commit()
 
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
