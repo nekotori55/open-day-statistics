@@ -27,8 +27,12 @@ export function Charts(props: { district_data: [], class_data: [], region_data: 
         "#F2EAC4"
     ];
 
+    const compare = (a, b) => {
+        return b.count - a.count;
+    }
+
     return <div className={"charts-wrapper"}>
-        <KalugaBarChart data={props.district_data}
+        <RegionBarChart data={props.region_data.sort(compare).slice(0, 10)}
                         width={"50%"}
                         height={"50%"}
                         className={"left-top"}/>
@@ -41,7 +45,7 @@ export function Charts(props: { district_data: [], class_data: [], region_data: 
                        height={"50%"}
                        className={"left-bottom"}/>
 
-        <RegionBarChart data={props.region_data}
+        <KalugaBarChart data={props.district_data.sort(compare).slice(0, 15)}
                         width={"50%"}
                         height={"100%"}
                         className={"right-top"}/>
