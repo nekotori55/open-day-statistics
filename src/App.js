@@ -55,8 +55,15 @@ function App() {
         switch (active_tab) {
             case 0:
                 return <>
-                    <div className="Leaders-table-container">
-                        <LeadersTable rowData={district_data}/>
+                    <div className="applicants">
+                        <div className="applicants-count">
+                            <span>Абитуриентов: </span>
+                            <span>45</span>
+                        </div>
+
+                        <div className="Leaders-table-container">
+                            <LeadersTable rowData={district_data}/>
+                        </div>
                     </div>
 
                     <div className="Map-container">
@@ -67,15 +74,22 @@ function App() {
                 </>
             case 1:
                 return <>
-                    <div className="Leaders-table-container">
-                        <LeadersTable rowData={region_data}/>
+                    <div className="applicants">
+                        <div className="applicants-count">
+                            <span>Абитуриентов: </span>
+                            <span>45</span>
+                        </div>
+
+                        <div className="Leaders-table-container">
+                            <LeadersTable rowData={region_data}/>
+                        </div>
                     </div>
 
-                        <div className="Map-container">
-                            <PrettyMap data={region_data} centerID={"RU-KLU"} childId={"rus_map"}>
-                                <RussiaSVG id={"rus_map"}/>
-                            </PrettyMap>
-                        </div>
+                    <div className="Map-container">
+                        <PrettyMap data={region_data} centerID={"RU-KLU"} childId={"rus_map"}>
+                            <RussiaSVG id={"rus_map"}/>
+                        </PrettyMap>
+                    </div>
                 </>
             case 2:
                 return <>
