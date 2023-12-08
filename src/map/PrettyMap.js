@@ -13,6 +13,14 @@ function PrettyMap({data, centerID, childId, children}) {
 
     let center = centerID;
 
+    let scaleMultiplier;
+    if (childId === "rus_map") {
+        scaleMultiplier = 0.22;
+    }
+    else {
+        scaleMultiplier = 1;
+    }
+
     useEffect(() => {
             const svgElement = document.getElementById(childId);
             let drawData = convertRawDataToDrawData(data);
@@ -23,7 +31,7 @@ function PrettyMap({data, centerID, childId, children}) {
             removePreviouslyRenderedElements(svgElement);
 
             if (doDrawLines) {
-                drawLines(drawData, center, isLineAnimated, svgElement);
+                drawLines(drawData, center, isLineAnimated, svgElement, scaleMultiplier);
             }
 
             let isObninskWithData = drawData.some((va) => {return (va.id === obninskId) && (va.count > 0)});
@@ -38,6 +46,7 @@ function PrettyMap({data, centerID, childId, children}) {
                 let helper_line = createLineElement("helper_line",
                     vinoska_center,
                     obninsk_center,
+                    scaleMultiplier,
                     false,
                     1,
                     "#606060"
@@ -46,11 +55,11 @@ function PrettyMap({data, centerID, childId, children}) {
             }
 
             if (doDrawCircles) {
-                drawCircles(drawData, svgElement);
+                drawCircles(drawData, svgElement, scaleMultiplier);
             }
 
             if (doDrawNumbers) {
-                drawNumbers(drawData, svgElement);
+                drawNumbers(drawData, svgElement, scaleMultiplier);
             }
 
             setCurrentData(drawData);
@@ -62,14 +71,14 @@ function PrettyMap({data, centerID, childId, children}) {
     return (children);
 }
 
-function createTextElement(regionId, regionRectCenter, count) {
+function createTextElement(regionId, regionRectCenter, count, scaleMultiplier) {
     let textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
     textElement.setAttribute("id", regionId + "_circle");
     textElement.setAttribute("x", regionRectCenter.x);
     textElement.setAttribute("y", regionRectCenter.y);
     textElement.setAttribute("text-anchor", "middle");
     textElement.setAttribute("alignment-baseline", "central");
-    textElement.setAttribute("font-size", Math.log(count*count) + 15);
+    textElement.setAttribute("font-size", (Math.log(count*count) + 15) * scaleMultiplier);
     textElement.setAttribute("fill", "#ffffff");
     // textElement.setAttribute("r", 5 + count);
     textElement.classList.add("rendered");
@@ -79,7 +88,7 @@ function createTextElement(regionId, regionRectCenter, count) {
     return textElement;
 }
 
-function drawNumbers(drawData, root) {
+function drawNumbers(drawData, root, scaleMultiplier) {
     for (const obj of drawData) {
         let regionId = obj.id;
         let count = obj.count;
@@ -90,19 +99,19 @@ function drawNumbers(drawData, root) {
 
             let regionRectCenter = calcElementPosition(regionRect, regionId);
 
-            let textElement = createTextElement(regionId, regionRectCenter, count);
+            let textElement = createTextElement(regionId, regionRectCenter, count, scaleMultiplier);
 
             render(root, textElement)
         }
     }
 }
 
-function createCircleElement(regionId, regionRectCenter, count) {
+function createCircleElement(regionId, regionRectCenter, count, scaleMultiplier) {
     let circleElement = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circleElement.setAttribute("id", regionId + "_circle");
     circleElement.setAttribute("cx", regionRectCenter.x);
     circleElement.setAttribute("cy", regionRectCenter.y);
-    circleElement.setAttribute("r", 10 + Math.log(count*count));
+    circleElement.setAttribute("r", (10 + Math.log(count*count))  * scaleMultiplier);
     circleElement.setAttribute("fill", "#3892f6");
     circleElement.classList.add("rendered");
     return circleElement;
@@ -126,7 +135,7 @@ function calcElementPosition(regionRect, regionId = "") {
     return regionRectCenter;
 }
 
-function drawCircles(drawData, root) {
+function drawCircles(drawData, root, scaleMultiplier) {
     for (const obj of drawData) {
         let regionId = obj.id;
         let count = obj.count;
@@ -137,14 +146,14 @@ function drawCircles(drawData, root) {
 
             let regionRectCenter = calcElementPosition(regionRect, regionId);
 
-            let circleElement = createCircleElement(regionId, regionRectCenter, count);
+            let circleElement = createCircleElement(regionId, regionRectCenter, count, scaleMultiplier);
 
             render(root, circleElement);
         }
     }
 }
 
-function createLineElement(regionId, regionRectCenter, targetRectCenter, isLineAnimated = false, animationSpeed = 1, lineColor = "#176dea") {
+function createLineElement(regionId, regionRectCenter, targetRectCenter, scaleMultiplier, isLineAnimated = false, animationSpeed = 1, lineColor = "#176dea") {
     let lineElement = document.createElementNS("http://www.w3.org/2000/svg", "line");
     // s.setAttribute('dominant-baseline', 'middle')
     lineElement.setAttribute("id", regionId + "_line");
@@ -153,11 +162,12 @@ function createLineElement(regionId, regionRectCenter, targetRectCenter, isLineA
     lineElement.setAttribute("y1", regionRectCenter.y);
     lineElement.setAttribute("x2", targetRectCenter.x);
     lineElement.setAttribute("y2", targetRectCenter.y);
+    lineElement.setAttribute('stroke-width', scaleMultiplier);
     // lineElement.setAttribute('class', 'rendered')
     lineElement.classList.add("rendered");
 
     if (isLineAnimated) {
-        lineElement.setAttribute("stroke-dasharray", "40 10");
+        lineElement.setAttribute("stroke-dasharray", (40 * scaleMultiplier).toString() + ' ' + (10 * scaleMultiplier).toString());
         // lineElement.setAttribute('stroke-dasharray', '300 600')
 
         let anim = document.createElementNS("http://www.w3.org/2000/svg", "animate");
@@ -180,7 +190,7 @@ function render(root, element) {
     root.append(element)
 }
 
-function drawLines(drawData, targetId, isLineAnimated, root) {
+function drawLines(drawData, targetId, isLineAnimated, root, scaleMultiplier) {
     let targetElement = root.getElementById(targetId);
     let lineTargetRect = targetElement.getBBox();
 
@@ -207,8 +217,9 @@ function drawLines(drawData, targetId, isLineAnimated, root) {
                 let lineElement = createLineElement(regionId,
                     regionRectCenter,
                     targetRectCenter,
+                    scaleMultiplier,
                     isLineAnimated,
-                    count);
+                    6);
 
                 render(root, lineElement);
             }
