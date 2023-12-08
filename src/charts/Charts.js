@@ -32,10 +32,11 @@ export function Charts(props: { district_data: [], class_data: [], region_data: 
     }
 
     return <div className={"charts-wrapper"}>
-        <RegionBarChart data={props.region_data.sort(compare).slice(0, 10)}
-                        width={"50%"}
-                        height={"50%"}
-                        className={"left-top"}/>
+        <div className={"left-top"}>
+            <h2>Субъекты России</h2>
+
+            <RegionBarChart data={props.region_data.filter(item => item.id !== "RU-KLU").sort(compare).slice(0, 10)}/>
+        </div>
 
         <ClassPieChart data={props.class_data}
                        callbackfn={(entry, index) => (
@@ -45,10 +46,11 @@ export function Charts(props: { district_data: [], class_data: [], region_data: 
                        height={"50%"}
                        className={"left-bottom"}/>
 
-        <KalugaBarChart data={props.district_data.sort(compare).slice(0, 15)}
-                        width={"50%"}
-                        height={"100%"}
-                        className={"right-top"}/>
+        <div className={"right-top"}>
+            <h2>Районы Калуги</h2>
+
+            <KalugaBarChart data={props.district_data.sort(compare).slice(0, 15)}/>
+        </div>
 
     </div>;
 

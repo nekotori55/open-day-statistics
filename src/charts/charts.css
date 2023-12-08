@@ -11,6 +11,8 @@
 .left-top {
     left: 0;
     top: 0;
+    width: 50%;
+    height: 50%;
 }
 
 .left-bottom {
@@ -21,9 +23,15 @@
 .right-top {
     right: 0;
     top: 0;
+    width: 50%;
+    height: 100%;
 }
 
 .right-bottom {
     right: 0;
     bottom: 0;
+}
+
+.charts-wrapper h2 {
+    margin: 0;
 }
