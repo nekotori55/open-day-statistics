@@ -61,12 +61,28 @@ def get_count_data():
                              '').fetchall()
     districts = [dict(row) for row in districts]
 
-    classes = conn.execute(''
-                           'select visitors.study_class as class, count(*) as count '
-                           'from visitors '
-                           'group by visitors.study_class '
-                           '')
-    classes = [dict(row) for row in classes]
+    # classes = conn.execute(''
+    #                        'select visitors.study_class as class, count(*) as count '
+    #                        'from visitors '
+    #                        'group by visitors.study_class '
+    #                        '')
+    # classes = [dict(row) for row in classes]
+
+    classes1 = conn.execute(''
+                            'SELECT SUM(study_class=8) as a, '
+                            ' SUM(study_class=9)as b, '
+                            ' SUM(study_class=10)as c, '
+                            ' SUM(study_class=11)as d '
+                            ' FROM visitors '
+                            '').fetchone()
+    classes = [
+        {'class': "8 класс и меньше", 'count': classes1[0]},
+        {'class': "9 класс", 'count': classes1[1]},
+        {'class': "10 класс", 'count': classes1[2]},
+        {'class': "11 класс", 'count': classes1[3]},
+    ]
+
+    # classes = [dict(row) for row in classes]
 
     amount = conn.execute(''
                           'select count(1) from visitors'
@@ -80,7 +96,7 @@ def get_count_data():
     data['regions'] = regions
     data['districts'] = districts
     data['classes'] = classes
-    data['amounts'] = [amount,amount2]
+    data['amounts'] = [amount, amount2]
 
     return jsonify(data)
 

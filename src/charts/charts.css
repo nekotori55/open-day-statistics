@@ -33,22 +33,25 @@
 }
 
 .recharts-pie-label-text {
-    font-size: x-large;
-    dominant-baseline: middle;
+    /*font-size: x-large;*/
+    /*dominant-baseline: middle;*/
 }
 
 .recharts-legend-item-text {
-    color: black !important;
+    /*color: black !important;*/
     font-size: large;
+    filter: brightness(90%);
+    /*filter: contrast(110%);*/
 }
 
-.recharts-legend-item-text:after {
-    content: " класс"
-}
+/*.recharts-legend-item-text:after {*/
+/*    content: " класс"*/
+/*}*/
 
-.legend-item-0 .recharts-legend-item-text:first-of-type:before {
-    content: "≤";
-}
+/*.legend-item-0 .recharts-legend-item-text:first-of-type:before {*/
+/*    content: "≤";*/
+/*}*/
+
 .charts-wrapper h2 {
     margin: 0;
 }
