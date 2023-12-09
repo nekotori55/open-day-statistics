@@ -4,6 +4,9 @@ import sqlite3
 
 app = Flask(__name__)
 
+# debug_run = True
+debug_run = False
+
 
 def get_db_connection_row():
     conn = sqlite3.connect('database.db')
@@ -104,4 +107,4 @@ def add__data():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=debug_run)
