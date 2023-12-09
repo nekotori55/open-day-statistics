@@ -90,11 +90,11 @@ function App() {
                         </div>
                     </div>
 
-                        <div className="Map-container">
-                            <PrettyMap data={region_data} centerID={"RU-KLU"} childId={"rus_map"}>
-                                <RussiaSVG/>
-                            </PrettyMap>
-                        </div>
+                    <div className="Map-container">
+                        <PrettyMap data={region_data} centerID={"RU-KLU"} childId={"rus_map"}>
+                            <RussiaSVG/>
+                        </PrettyMap>
+                    </div>
                 </>
             case 2:
                 return <>
@@ -106,28 +106,30 @@ function App() {
     return (
         <div className="App">
             <Header/>
+            <div className="content-header">
+                <Nav handleActive={(value) => setActiveTab(value)}/>
+                <h1>День открытых дверей</h1>
+                <div></div>
+            </div>
             <div className="main-content">
                 <div className="information">
-                    <div className="content-header">
-                        <Nav handleActive={(value) => setActiveTab(value)}/>
-                        <h1>День открытых дверей</h1>
-                        <div></div>
-                    </div>
                     <div className="content">
                         {renderTab(active_tab)}
 
                     </div>
                 </div>
-                <input type="checkbox" id="hide-checkbox"/>
-                <div className="hide-button-container">
-                    <label className="hide-button" for="hide-checkbox">
-                        <span className="off">❮</span>
-                        <span className="on">❯</span>
-                    </label>
-                </div>
-                <div className="form">
-                    <div className="form-container">
-                        <Form regions={regions} districts={districts} schools={schools} submit_callback={update}/>
+                <div className="outer-form">
+                    <input type="checkbox" id="hide-checkbox"/>
+                    <div className="hide-button-container">
+                        <label className="hide-button" for="hide-checkbox">
+                            <span className="off">❮</span>
+                            <span className="on">❯</span>
+                        </label>
+                    </div>
+                    <div className="form">
+                        <div className="form-container">
+                            <Form regions={regions} districts={districts} schools={schools} submit_callback={update}/>
+                        </div>
                     </div>
                 </div>
             </div>
