@@ -24,6 +24,7 @@ function App() {
     const [region_data, setRegionData] = useState([]);
     const [district_data, setDistrictData] = useState([]);
     const [class_data, setClassData] = useState([]);
+    const [amount_data, setAmountData] = useState([])
     const [active_tab, setActiveTab] = useState(0);
 
     const update = () => {
@@ -37,6 +38,7 @@ function App() {
                     setRegionData(data1.regions)
                     setDistrictData(data1.districts)
                     setClassData(data1.classes)
+                    setAmountData(data1.amounts)
                 });
             })
             .catch(function (err) {
@@ -60,7 +62,7 @@ function App() {
                     <div className="applicants">
                         <div className="applicants-count">
                             <span>Абитуриентов: </span>
-                            <span>45</span>
+                            <span>{amount_data[1]}</span>
                         </div>
 
                         <div className="Leaders-table-container">
@@ -80,7 +82,7 @@ function App() {
                     <div className="applicants">
                         <div className="applicants-count">
                             <span>Абитуриентов: </span>
-                            <span>45</span>
+                            <span>{amount_data[0]}</span>
                         </div>
 
                         <div className="Leaders-table-container">

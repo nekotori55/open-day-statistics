@@ -72,10 +72,15 @@ def get_count_data():
                           'select count(1) from visitors'
                           '').fetchone()[0]
 
+    amount2 = conn.execute(''
+                           'select count(1) from visitors '
+                           'where region_id = "RU-KLU"'
+                           '').fetchone()[0]
+
     data['regions'] = regions
     data['districts'] = districts
     data['classes'] = classes
-    data['amount'] = amount
+    data['amounts'] = [amount,amount2]
 
     return jsonify(data)
 
